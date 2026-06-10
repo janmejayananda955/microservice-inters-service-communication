@@ -1,10 +1,8 @@
 package com.orderservice.controller;
 
+import com.orderservice.dto.OrderRequest;
 import com.orderservice.service.OrderService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/orders")
@@ -16,7 +14,7 @@ public class OrderController {
     }
 
     @PostMapping("/{productId}")
-    public String placeOrder(@PathVariable String productId) {
-        return orderService.placeOrder(productId);
+    public String placeOrder(@PathVariable String productId, @RequestBody OrderRequest orderRequest) {
+        return orderService.placeOrder(productId, orderRequest.getQuantity());
     }
 }

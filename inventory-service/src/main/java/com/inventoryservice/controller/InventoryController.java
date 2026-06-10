@@ -1,10 +1,7 @@
 package com.inventoryservice.controller;
 
 import com.inventoryservice.service.InventoryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/inventory")
@@ -18,5 +15,10 @@ public class InventoryController {
     @GetMapping("/{productId}")
     public String checkInventory(@PathVariable String productId) {
         return inventoryService.checkInventory(productId);
+    }
+
+    @PatchMapping("/{productId}")
+    public String updateInventory(@PathVariable String productId, @RequestBody int quantity) {
+        return inventoryService.updateInventory(productId, quantity);
     }
 }
